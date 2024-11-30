@@ -4,6 +4,9 @@ const containerSelectEl = document.getElementById('item-count');  //  конте
 const countEl = document.querySelector('.count')
 const BASE_API ='https://brandstestowy.smallhost.pl/api'
 
+
+
+
 const productItemMarkup = ({id})=> `<li class="product-item">ID: ${id} </li>`
 
 const  productsListMarkup = (items) =>{
