@@ -1,0 +1,119 @@
+.container-hero {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15;
+    padding-right: 15;
+  }
+
+.title-hero {
+    font-size: 16px;
+  }
+
+  .is-visible {
+    display: none;
+  }
+
+  /*   dodatki  */
+
+  .section-dodatek{
+    width: 100%;
+     text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }  
+
+  .section-photo {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+   }
+
+   .circle-item {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlay-middle{
+    width: 40%;
+ }
+
+ @media screen and (min-width: 320px){
+
+  .container-hero {
+    width: 320px;
+  }
+ }
+
+ @media screen and (min-width: 1200px) {
+  .btn-hero{
+    background-color: var(--btn-hero)
+  }
+  .description-hero {
+    margin-left: 100px;
+    margin-top: 40px;
+    width: 250px;
+    text-align: start;
+  }
+
+  .circle-list {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .circle-item {
+    justify-content: flex-start;
+  }
+
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+ }
+
+ @media screen and (max-width: 1199px) {
+
+  .circle-item:nth-child(2n) {
+   margin-left: 15px;
+ }
+ .description-hero {
+   text-align: center;
+ }
+ 
+ }
+
+ @media screen and (min-width: 1200px){
+  .is-visible {
+    display: block;
+  }
+  .container-hero {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  h1.title-hero {
+    display: none
+  }
+  .section-dodatek {
+    display: flex;
+    width: calc((100% - 50px) /3);
+    flex-direction: column;
+   
+    justify-content: center;
+  }
+
+  .section-dodatek:not(:last-child) {
+    margin-right: 20px;
+  }
+  .section {
+    display: flex;
+  }
+ }

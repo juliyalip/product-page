@@ -1,0 +1,84 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+section:nth-child(2n + 1) {
+  background-color: #f6f6f6;
+  background-image: url('../images/Vector1.png'), url('../images/Vector2.png');
+  background-size: 150px auto, 150px auto; /* Индивидуальные размеры для каждого изображения */
+  background-repeat: no-repeat;
+  background-position: left center, right center;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.parent-underlined {
+  position: relative;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.underlined::after {
+  content: "";
+  position: absolute;
+  line-height: 80px;
+  bottom: -5px;
+  left: 0;
+  width: 50%;
+  transform: translateX(50%);
+  height: 1px;
+  background-color: black;
+}
+
+.btn-base {
+  display: none;
+}
+
+@media screen and (min-width: 320px) {
+  .container {
+    width: 320px;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .container {
+    width: 1200px;
+    display: flex;
+  }
+  .description{
+    font-size: 14px;
+}
+ .btn-base{
+      display: block;
+      padding: 10px 20px;
+      border: none;
+     color: white;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      font-size: 18px;
+    }
+      
+
+
+}

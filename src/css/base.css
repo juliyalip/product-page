@@ -1,0 +1,51 @@
+:root {
+    --main-background: #ffffff;
+    --primary-color: rgba(173, 72, 68, 1);
+    --mobile-menu-color: rgba(216, 216, 216, 1);
+    --btn-hero: #30AB4C;
+   }
+  
+  html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    margin: 0;
+    background-color: var(--main-background);
+    font-family: "Nunito", sans-serif;
+    font-size: 12px;
+  }
+  
+  ul {
+    padding-left: 0;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  
+#section3{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  
+  @media screen and (min-width: 1200px){
+    body {
+      padding-top: 60px;
+    }
+  }
+  

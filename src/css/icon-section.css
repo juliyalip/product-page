@@ -1,0 +1,71 @@
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+  }
+
+  
+.icon-item>.title-section {
+    margin-bottom: 15px;
+  }
+
+  .icon {
+    width: 42px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .update-icon~span {
+    margin-top: 10px;
+  }
+
+  @media screen and (min-width: 320px){
+    .container-footer{
+      width: 320px;
+    }
+  }
+
+  @media screen and (min-width: 1200px){
+    .icon-list-js {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      position: relative;
+    }
+    .icon-item {
+      width: calc((100% - 33%) / 2);
+      height: fit-content;
+      position: relative;
+      padding: 15px;
+      height: 270px;
+    }
+    .icon {
+      display: none;
+    }
+    .update-icon::before {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #d9d9d9;
+      border-radius: 50%;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .product-img {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .dog-img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
