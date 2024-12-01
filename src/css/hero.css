@@ -1,13 +1,18 @@
 .container-hero {
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 80px;
     padding-left: 15;
     padding-right: 15;
   }
 
-.title-hero {
+.container-hero .title-hero {
     font-size: 18px;
+    margin-top: 30px;
   }
+.container-hero .description{
+  margin-top: 30px;
+}
 
   .gradient-text {
           background: linear-gradient(
@@ -35,22 +40,7 @@
     padding-right: 15px;  
   }  
 
-  .section{
-    position: relative;
-  }
-
-  .section-dodatek::after{
-    content: '';
-    position: absolute;
-    left: -20px;
-    bottom: 40px;
-    width: 30px;
-    height: 30px;
-    background-image: url('../images/Vector_min_1.png');
-    background-size: 200px auto;
-    background-repeat: no-repeat;
-    background-position: left 20% ; 
-  }
+ 
 
   .section-photo {
     display: flex;
