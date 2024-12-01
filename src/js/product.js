@@ -1,20 +1,15 @@
 const productListEl = document.querySelector('.container-products-js');
 const selectListEl = document.querySelector('.select-menu-js')
-const containerSelectEl = document.getElementById('item-count');  //  контейнер для селекта
+const containerSelectEl = document.getElementById('item-count'); 
 const countEl = document.querySelector('.count')
+const selectElement = document.getElementById('item-count');
+
 const BASE_API ='https://brandstestowy.smallhost.pl/api'
 
-
-
-
-const productItemMarkup = ({id})=> `<li class="product-item">ID: ${id} </li>`
-
+const productItemMarkup = ({id})=> `<li class="product-item" data-sourse=${id}>ID: ${id} </li>`
 const  productsListMarkup = (items) =>{
     return items.map(productItemMarkup).join('')
 }
-
-const selectElement = document.getElementById('item-count');
-
 
 window.addEventListener('resize', renderInitionSelect)
 
@@ -57,11 +52,9 @@ fetchAdnRenderProducts(quality)
   }
 
   selectElement.addEventListener('change', async function() {
-    console.log('Выбрано значение:', this.value);
+    console.log( this.value);
     countEl.innerHTML = this.value
       await fetchAdnRenderProducts(this.value)
 });
-
-
 
 

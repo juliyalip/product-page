@@ -21,6 +21,14 @@ module.exports = {
         test: /\.(png|jpg|jpeg|gif|svg)$/i, 
         type: 'asset/resource', 
       },
+      {
+        test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'icons/[name][ext]',
+        }, }
+      
+    
     ],
   },
   

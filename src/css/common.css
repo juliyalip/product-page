@@ -5,17 +5,25 @@
   padding-right: 15px;
 }
 
+.container-hero{
+  margin-bottom: 80px;
+}
+
 .section {
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
-section:nth-child(2n + 1) {
+section:nth-child(2n+1){
   background-color: #f6f6f6;
+}
+
+section:nth-child(1) {
+ 
   background-image: url('../images/Vector1.png'), url('../images/Vector2.png');
-  background-size: 150px auto, 150px auto; /* Индивидуальные размеры для каждого изображения */
+  background-size: 100px auto, 100px auto; 
   background-repeat: no-repeat;
-  background-position: left center, right center;
+  background-position: left 25% , right 30%;
 }
 
 .subtitle {
@@ -53,6 +61,8 @@ section:nth-child(2n + 1) {
   display: none;
 }
 
+
+
 @media screen and (min-width: 320px) {
   .container {
     width: 320px;
@@ -60,6 +70,13 @@ section:nth-child(2n + 1) {
 }
 
 @media screen and (min-width: 1200px){
+  section:nth-child(1) {
+    background-image: url('../images/Vector1.png'), url('../images/Vector2.png');
+    background-size: 200px auto, 200px auto; 
+    background-repeat: no-repeat;
+    background-position: left center , right 40%;
+  }
+
   .container {
     width: 1200px;
     display: flex;
