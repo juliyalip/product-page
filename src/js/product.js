@@ -1,20 +1,20 @@
 const productListEl = document.querySelector('.container-products-js');
 const selectListEl = document.querySelector('.select-menu-js');
-const containerSelectEl = document.getElementById('item-count');
-const qualityProductEl = document.querySelector('.count');
 const selectElement = document.getElementById('item-count');
 
 const BASE_API = 'https://brandstestowy.smallhost.pl/api';
 
-let totalLoadedProducts = 0; // Счетчик всех загруженных продуктов
-let allLoadedProducts = []; // Массив для хранения всех загруженных продуктов
-let hasMoreProducts = true; // Флаг наличия данных
+let totalProducts = 50; 
+let allLoadedProducts = []; 
+let hasMoreProducts = true; 
 
 class ApiProducts {
   constructor() {
     this.page = 1;
     this._quantity = 8;
     this.isLoading = false;
+    this.initResizeListener(); 
+    this.updateQuantity(); 
   }
 
   get quantity() {
@@ -25,42 +25,69 @@ class ApiProducts {
     if (typeof value === 'number' && value > 0) {
       this._quantity = value;
     } else {
-      throw new Error('Quantity must be a positive number');
+      throw new Error('invalid number');
     }
   }
 
+  updateQuantity() {
+    const width = window.innerWidth;
+
+    if (width <= 767) {
+      this.quantity = 2; 
+    } else if (width <= 1199) {
+      this.quantity = 6; 
+    } else {
+      this.quantity = 8; 
+    }
+  }
+
+  initResizeListener() {
+    window.addEventListener("resize", () => {
+      this.updateQuantity();
+    });
+  }
+
   async fetchProducts() {
-    if (this.isLoading) return [];
+    if (this.isLoading || !hasMoreProducts) return [];
     this.isLoading = true;
+
     try {
       const response = await fetch(`${BASE_API}/random?pageNumber=${this.page}&pageSize=${this._quantity}`);
       if (!response.ok) {
         throw new Error('Error response from server');
       }
+
       const data = await response.json();
-      this.page += 1;
+      this.page += 1; 
       this.isLoading = false;
+
+      allLoadedProducts = [...allLoadedProducts, ...data.data];
+
+    
+      if (allLoadedProducts.length >= totalProducts) {
+        hasMoreProducts = false;
+      }
+
       return data.data;
     } catch (error) {
       console.error(error);
       this.isLoading = false;
-      return []; 
+      return [];
     }
   }
 
   startToScroll(container) {
     window.addEventListener('scroll', async () => {
       const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-      if (scrollTop + clientHeight >= scrollHeight - 50) {
-        const products = await this.fetchProducts();
-        if (products && products.length > 0) {
-          renderProducts(products, container);
-          totalLoadedProducts += products.length; 
-          qualityProductEl.textContent = totalLoadedProducts; 
-          console.log('Updated totalLoadedProducts:', totalLoadedProducts); 
-        } else {
+      if (scrollTop + clientHeight >= scrollHeight - 70) {
+        if (!hasMoreProducts) {
           console.log('No more products to load.');
-          hasMoreProducts = false; 
+          return;
+        }
+
+        const products = await this.fetchProducts();
+        if (products.length > 0) {
+          renderProducts(products, container);
         }
       }
     });
@@ -72,35 +99,29 @@ function renderProducts(products, container) {
   container.insertAdjacentHTML('beforeend', renderString);
 }
 
-const productItemMarkup = ({ id }) => `<li class="product-item" data-sourse=${id}>ID: ${id}</li>`;
+const productItemMarkup = ({ id }) => `<li class="product-item" data-source=${id}><div>ID: ${id}</div></li>`;
 const productsListMarkup = (items) => items.map(productItemMarkup).join('');
 
 const apiProducts = new ApiProducts();
 
-selectElement.addEventListener('change', (event) => {
-  const newQuantity = parseInt(event.target.value, 10);
-  apiProducts.quantity = newQuantity;
-  resetAndReload();
-});
+apiProducts.startToScroll(productListEl);
 
 async function resetAndReload() {
   apiProducts.page = 1;
-  productListEl.innerHTML = ''; 
-  totalLoadedProducts = 0; 
+  allLoadedProducts = [];
+  hasMoreProducts = true;
+  productListEl.innerHTML = '';
   await renderInterface();
 }
 
 async function renderInterface() {
   try {
     const products = await apiProducts.fetchProducts();
-    if (products && products.length > 0) {
-      totalLoadedProducts += products.length; 
-      qualityProductEl.textContent = totalLoadedProducts; 
-      console.log('Updated totalLoadedProducts:', totalLoadedProducts); 
+    if (products.length > 0) {
       renderProducts(products, productListEl);
     } else {
       console.log('No more products to load.');
-      hasMoreProducts = false; 
+      hasMoreProducts = false;
     }
   } catch (error) {
     console.error(error);
@@ -108,6 +129,3 @@ async function renderInterface() {
 }
 
 renderInterface();
-apiProducts.startToScroll(productListEl);
-
-
