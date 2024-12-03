@@ -12,8 +12,7 @@ function onOpenModal(e) {
     if (e.target.nodeName !== 'LI') {
     return
      };
-   
-    const id = e.target.dataset.sourse
+    const id = e.target.dataset.source
     modalEl.classList.add("is-open")
     modalMarkup(id)
     };
@@ -38,7 +37,7 @@ iconCloseEl.addEventListener('click', closeModal )
 function onClickBackdrop(event){
 if(event.target === event.currentTarget){
     modalEl.classList.remove("is-open")
-}
+ }
 }
 
 function closeModal (){
