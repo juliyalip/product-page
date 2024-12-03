@@ -4,14 +4,12 @@
     padding-right: 15px;
   }
   
-
 .item-number {
     display: flex;
     align-items: center;
     justify-content: baseline;
     margin-bottom: 15px;
   }
-  
 
   .number {
     display: flex;
@@ -27,7 +25,7 @@
     box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0 4px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12);
   }
 
-  @media screen and (min-width: 1200px){
+  @media screen and (min-width: 768px){
     .container-number {
       display: none;
     }
