@@ -59,7 +59,8 @@
     <!-- hero section -->
 
     <section id="section1">
-      <div class="container-hero">
+      <div class="canvas">
+      <div class="container-hero ">
         <img loading="lazy" src="./images/header-product-photo.png" alt="preparat dlia psa i kota" class="img-hero" />
         <div class="description-hero">
           <svg class="logo is-visible">
@@ -93,22 +94,31 @@
               - <br /> Czarciego Pazura</h2>
           </div>
 
-          <p class="description  ">
+          <p class="description selected">
             Zapewnia dodatkowe wsparcie w zwalczaniu stanów bólowych i
             zapalnych. Skoncentrowane składniki aktywne, opracowane we
             współpracy z lekarzami weterynarii, przynoszą szybkie i zauważalne
             efekty, szczególnie korzystne dla zwierząt z poważnymi problemami
             stawowymi.
           </p>
+
+          <div class="overlay-canvas">
           <div class="overlay-base overlay-img">
             <img loading="lazy" src="./images/photo_2.jpg" alt="kwiat" />
           </div>
         </div>
+      </div>
 
         <div class="section-dodatek ">
           <div class="parent-underlined">
             <h3 class="subtitle underlined">Wygoda - <br /> dwa sposoby podawania</h3>
           </div>
+
+
+
+
+
+
           <ul class="circle-list">
             <li class="circle-item">
               <div class="number">1</div> Bezpośrednio do pyszczka
@@ -118,7 +128,10 @@
             </li>
           </ul>
 
+
+          <div class="overlay-canvas">
           <div class="section-photo">
+
 
             <div class="overlay-base overlay-middle">
               <img loading="lazy" src="./images/dog_1.jpg" alt="sad dog" />
@@ -127,6 +140,7 @@
               <img loading="lazy" src="./images/dog.jpg" alt="feed a dog" />
 
             </div>
+          </div>
           </div>
         </div>
 
@@ -142,20 +156,25 @@
             aktywnością na długo. Skorzystaj z zalet Arthrohard i zobacz różnicę
             w komforcie życia swojego zwierzęcia.
           </p>
+          <div class="overlay-canvas">
           <div class="overlay-base overlay-img">
             <img loading="lazy" src="./images/photo_3.jpg" alt="pharma" />
           </div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
     <!--  section number for mobile ------>
     <section id="section2">
 
-      <div class="parent-underlined text-center">
-        <h1 class="title-hero underlined">Działanie preparatu</h1>
-      </div>
+      
 
       <div class="container container-number">
+        <div class="parent-underlined text-center">
+          <h1 class="subtitle underlined">Działanie preparatu</h1>
+        </div>
         <ul class="section-number">
           <li class="item-number">
             <span class="number">1</span>
@@ -205,7 +224,7 @@
       </div>
 
       <div class="container">
-        <!--  icon list        -->
+        <!------------------  icon list    --------------------------->
         <div class="icon-section">
           <div class="icon-list-js">
           <div class="icon-item">
@@ -290,27 +309,35 @@
 
     </section>
     <section id="section3">
+     
       <div class="container">
         <div class="section-select">
-          <span class="label-select">liczba produktów na stronie</span>
-          <div class="wrapper">
-
-       
-            <div class="selected-count count-select-js ">
-              <span class="count">50</span>
+          <div class="label-select">liczba produktów na stronie</div>
+             <div class="selected-count count-select-js ">
+              <div class="click-count-js">
+              <span class="count"></span>
+              
               <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 0.75L7.5 7.25L14 0.75" stroke="white" stroke-width="2" />
               </svg>
             </div>
+              <ul class="dropdown-list">
+                <li data-count="8" class="item-count">8</li>
+                <li data-count="16" class="item-count">16</li>
+                <li data-count="24" class="item-count">24</li>
+                <li data-count="32" class="item-count">32</li>
+      
+                </ul>
+          
+            </div>
+ 
 
-
-
-          </div>
         </div>
-
-
       </div>
- <div class="container">
+ <div class="container ">
+
+  
+
       <ul class="product-list container-products-js "></ul>
 </div>
 
@@ -324,6 +351,7 @@
           </svg>
         </div>
         </div>
+     
     </section>
   </main>
 
