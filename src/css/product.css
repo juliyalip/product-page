@@ -153,6 +153,8 @@ background-color: aliceblue;
 #section3{
   background-attachment: fixed;
 }
+
+
 @media screen and (max-width: 1199px){
   .section-select{
 text-align: center;
