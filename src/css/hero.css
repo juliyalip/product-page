@@ -38,6 +38,38 @@
   text-align: center;
   padding-left: 15px;
   padding-right: 15px;
+  position: relative;
+}
+
+.selected::after{
+  content: "";
+  position: absolute;
+  line-height: 80px;
+  bottom: -15px;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background-color: black;
+
+}
+  
+
+
+.overlay-canvas::before{
+  content: '';
+  position: absolute;
+   background-image: url('../images/Vector_min_2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.overlay-canvas::after{
+  content: '';
+  position: absolute;
+  
+  background-image: url('../images/Vector_min_1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .section-photo {
@@ -63,6 +95,34 @@
   .container-hero {
     width: 320px;
   }
+  .overlay-canvas::before{
+    bottom: -30%;
+    left: -20px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .overlay-canvas::after{
+    bottom: -30%;
+  left: 85%;
+  width: 100px;
+  height: 100px;
+  }
+
+  .overlay-canvas:last-child::before {
+    bottom: -35%;
+    
+  }
+
+  .overlay-canvas:last-child::after {
+    bottom: -35%;
+    
+  }
+  #section2{
+    padding-top: 20px;
+  }
+
+
 }
 
 @media screen and (max-width: 1199px) {
@@ -72,6 +132,9 @@
 
   .description-hero {
     text-align: center;
+  }
+  .section-dodatek:not(:last-child){
+    margin-bottom: 35px;
   }
 
 }
@@ -86,8 +149,7 @@
     align-items: center;
 
   }
-
-  .description-hero {
+    .description-hero {
     margin-left: 30px;
   }
 
@@ -95,7 +157,28 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
+    cursor: pointer;
+      }
+
+     
+      .section-dodatek:not(:last-child){
+        margin-right: 20px;
+      }
+
+      .overlay-canvas::after{
+        top: 50%;
+      left: 85%;
+      width: 100px;
+      height: 100px;
+      }
+
+      .overlay-canvas::before{
+        top: 70%;
+        left: -20px;
+        width: 100px;
+        height: 100px;
+      }
+    
  
   .overlay-base{
     overflow: hidden;
@@ -105,7 +188,9 @@
     align-items: center;
     justify-content: center;
     height: 340px;
-  }
+    z-index: 1;
+    position: relative;
+     }
   .overlay-img{
     width: 100%;
   }
@@ -122,9 +207,25 @@
   }
 }
 
+
+
 @media screen and (min-width: 1200px) {
   .is-visible {
     display: block;
+  }
+
+  .overlay-canvas::after{
+    top: 50%;
+  left: 92%;
+  width: 100px;
+  height: 100px;
+  }
+
+  .overlay-canvas::before{
+    top: 70%;
+    left: -30px;
+    width: 100px;
+    height: 100px;
   }
 
   .container-hero {

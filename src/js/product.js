@@ -1,97 +1,18 @@
+
 const productListEl = document.querySelector('.container-products-js');
 const selectListEl = document.querySelector('.select-menu-js');
-const selectElement = document.getElementById('item-count');
+const countEl = document.querySelector('.count');
+const dropDownList = document.querySelector('.dropdown-list');
+const countWrapper = document.querySelector('.click-count-js')
 
 const BASE_API = 'https://brandstestowy.smallhost.pl/api';
 
-let totalProducts = 50; 
-let allLoadedProducts = []; 
-let hasMoreProducts = true; 
 
-class ApiProducts {
-  constructor() {
-    this.page = 1;
-    this._quantity = 8;
-    this.isLoading = false;
-    this.initResizeListener(); 
-    this.updateQuantity(); 
-  }
+countWrapper.addEventListener('click',  onToggleDropdownMenu)
 
-  get quantity() {
-    return this._quantity;
-  }
 
-  set quantity(value) {
-    if (typeof value === 'number' && value > 0) {
-      this._quantity = value;
-    } else {
-      throw new Error('invalid number');
-    }
-  }
-
-  updateQuantity() {
-    const width = window.innerWidth;
-
-    if (width <= 767) {
-      this.quantity = 2; 
-    } else if (width <= 1199) {
-      this.quantity = 6; 
-    } else {
-      this.quantity = 8; 
-    }
-  }
-
-  initResizeListener() {
-    window.addEventListener("resize", () => {
-      this.updateQuantity();
-    });
-  }
-
-  async fetchProducts() {
-    if (this.isLoading || !hasMoreProducts) return [];
-    this.isLoading = true;
-
-    try {
-      const response = await fetch(`${BASE_API}/random?pageNumber=${this.page}&pageSize=${this._quantity}`);
-      if (!response.ok) {
-        throw new Error('Error response from server');
-      }
-
-      const data = await response.json();
-      this.page += 1; 
-      this.isLoading = false;
-
-      allLoadedProducts = [...allLoadedProducts, ...data.data];
-
-    
-      if (allLoadedProducts.length >= totalProducts) {
-        hasMoreProducts = false;
-      }
-
-      return data.data;
-    } catch (error) {
-      console.error(error);
-      this.isLoading = false;
-      return [];
-    }
-  }
-
-  startToScroll(container) {
-    window.addEventListener('scroll', async () => {
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-      if (scrollTop + clientHeight >= scrollHeight - 70) {
-        if (!hasMoreProducts) {
-          console.log('No more products to load.');
-          return;
-        }
-
-        const products = await this.fetchProducts();
-        if (products.length > 0) {
-          renderProducts(products, container);
-        }
-      }
-    });
-  }
+function onToggleDropdownMenu() {
+   dropDownList.classList.toggle('isOpen')
 }
 
 function renderProducts(products, container) {
@@ -102,31 +23,119 @@ function renderProducts(products, container) {
 const productItemMarkup = ({ id }) => `<li class="product-item" data-source=${id}><div>ID: ${id}</div></li>`;
 const productsListMarkup = (items) => items.map(productItemMarkup).join('');
 
-const apiProducts = new ApiProducts();
 
-apiProducts.startToScroll(productListEl);
+class ApiProducts {
+  constructor(selector) {
+    this.currentPage = 1;
+    this.totalPages = 0;
+    this.loading = false;
+    this._pageSize = 8;
+    this._selector = selector
+  }
 
-async function resetAndReload() {
-  apiProducts.page = 1;
-  allLoadedProducts = [];
-  hasMoreProducts = true;
-  productListEl.innerHTML = '';
-  await renderInterface();
-}
+  get pageSize() {
+    return this._pageSize
+  }
 
-async function renderInterface() {
-  try {
-    const products = await apiProducts.fetchProducts();
-    if (products.length > 0) {
-      renderProducts(products, productListEl);
-    } else {
-      console.log('No more products to load.');
-      hasMoreProducts = false;
+  async loadingInitionProducts() {
+    
+    try {
+
+      this.loading = true;
+      const response = await fetch(`${BASE_API}/random?pageNumber=${this.currentPage}&pageSize=${this._pageSize}`)
+      const { totalPages, data } = await response.json();
+      this.currentPage += 1;
+      this.totalPages = totalPages;
+      countEl.textContent = this._pageSize
+
+      this._selector.textContent = this._pageSize;
+
+      renderProducts(data, productListEl)
+
+    } catch (error) {
+      console.log(error)
+    } finally {
+      this.loading = false
     }
-  } catch (error) {
-    console.error(error);
+  }
+
+  async onClickMenu(e) {
+    const selectedCount = e.target.dataset.count
+   
+   if(selectedCount  === this._pageSize){
+    return 
+   }
+   onToggleDropdownMenu()
+    countEl.textContent = ''
+    dropDownList.classList.remove('isOpen')
+
+    productListEl.innerHTML = '';
+    this.currentPage = 1;
+    this._pageSize = selectedCount;
+    try {
+      this.loading = true
+      const responce = await fetch(`${BASE_API}/random?pageNumber=${this.currentPage}&pageSize=${this._pageSize}`);
+      const { data, totalPages, currentPage } = await responce.json();
+      console.log(data.length, totalPages, currentPage)
+      renderProducts(data, productListEl)
+      this.totalPages = totalPages;
+      countEl.textContent = this._pageSize
+      this.currentPage += 1
+
+    } catch (error) {
+      console.log(error)
+    } finally {
+      this.loading = false
+    }
+
+  }
+
+
+  async startToScroll() {
+    if (this.loading) {
+      return
+    }
+    let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+
+    if (windowRelativeBottom < document.documentElement.clientHeight + 200) {
+
+      try {
+        this.loading = true
+        const responce = await fetch(`${BASE_API}/random?pageNumber=${this.currentPage}&pageSize=${this._pageSize}`);
+        const { data, currentPage } = await responce.json();
+        this.currentPage += 1;
+        renderProducts(data, productListEl)
+        countEl.textContent = currentPage * this._pageSize
+        if (this.page === this.totalPages) {
+          window.removeEventListener("scroll", this.startToScroll.bind(this))
+        }
+
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+
+    }
   }
 }
 
-renderInterface();
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+};
+
+
+const apiProducts = new ApiProducts(countEl)
+
+apiProducts.loadingInitionProducts()
+
+dropDownList.addEventListener('click', apiProducts.onClickMenu.bind(apiProducts))
+
+window.addEventListener("scroll", debounce(apiProducts.startToScroll.bind(apiProducts), 100))
+
+
 
