@@ -39,7 +39,7 @@ position: relative;
 
 .is-open{
   opacity: 1; 
-    visibility: visible;
+  visibility: visible;
 }
 
 .wrapper-modal{
@@ -117,6 +117,7 @@ height: 20px;
  color: black;
  z-index: 3;
  opacity: 0;
+ visibility: hidden;
  text-align: center;
  transform: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -126,6 +127,7 @@ height: 20px;
   display: flex;
   align-items: center;
  justify-content: center;
+ cursor: pointer;
 }
 
 .selected-count .isOpen{
