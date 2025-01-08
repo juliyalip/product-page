@@ -5,9 +5,6 @@
   padding-right: 15px;
 }
 
-.container-hero{
-  margin-bottom: 80px;
-}
 
 section {
   padding-top: 40px;
@@ -82,7 +79,7 @@ section:nth-child(2n+1){
   }
 
   .canvas{
-      background-size: 200px auto, 200px auto, 100px auto; 
+      background-size: 150px auto, 150px auto, 50px auto; 
       background-position: left center , right 40%, top 20%  right -50px;
      
   }
@@ -106,5 +103,9 @@ section:nth-child(2n+1){
 
     .subtitle {
       font-size: 18px;
+    }
+
+    .canvas{
+      background-size: 250px auto, 250px auto, 100px auto; 
     }
 }

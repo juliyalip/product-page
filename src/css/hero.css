@@ -2,6 +2,7 @@
 .container-hero {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 80px;
   padding-left: 15;
   padding-right: 15;
 }
@@ -14,6 +15,7 @@
 .container-hero .description {
   margin-top: 30px;
 }
+
 
 .gradient-text {
   background: linear-gradient(90deg,
@@ -54,8 +56,6 @@
 
 }
   
-
-
 .overlay-canvas::before{
   content: '';
   position: absolute;
